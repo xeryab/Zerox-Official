@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,8 +8,8 @@
     :root{
       --bg1:#0f172a;
       --bg2:#071020;
-      --accent1:#25D366; /* WhatsApp green */
-      --accent2:#2AABEE; /* Telegram blue */
+      --accent1:#25D366;
+      --accent2:#2AABEE;
       --glass: rgba(255,255,255,0.04);
       --soft: rgba(255,255,255,0.06);
       --neon: rgba(255,255,255,0.06);
@@ -16,183 +17,88 @@
       --shadow: 0 10px 30px rgba(2,6,23,0.7);
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}body{
-  background: radial-gradient(1200px 600px at 10% 20%, rgba(58,77,255,0.06), transparent),
-              radial-gradient(800px 500px at 90% 80%, rgba(2,255,176,0.03), transparent),
-              linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:#e6eef8;
-  overflow:hidden;
-  display:flex;align-items:center;justify-content:center;padding:40px;
-}
-
-/* Hacker masks animated background */
-.mask-scene{
-  position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;
-}
-.mask{
-  position:absolute;width:220px;height:220px;opacity:0.06;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.6));
-  transform-origin:center center;will-change:transform,opacity,left,top;
-  mix-blend-mode:screen;
-  animation: float var(--dur,18s) linear infinite, rotate var(--rot,12s) linear infinite;
-}
-/* multiple instances positioned */
-.mask:nth-child(1){left:5%;top:10%;--dur:20s;--rot:14s;opacity:0.06}
-.mask:nth-child(2){left:80%;top:8%;--dur:26s;--rot:18s;opacity:0.05;width:260px;height:260px}
-.mask:nth-child(3){left:60%;top:60%;--dur:22s;--rot:20s;opacity:0.04}
-.mask:nth-child(4){left:15%;top:70%;--dur:30s;--rot:16s;opacity:0.03;width:180px;height:180px}
-
-@keyframes float{
-  0%{transform:translateY(0) translateX(0) scale(1)}
-  25%{transform:translateY(-18px) translateX(12px) scale(1.02)}
-  50%{transform:translateY(6px) translateX(-10px) scale(0.98)}
-  75%{transform:translateY(-8px) translateX(6px) scale(1.01)}
-  100%{transform:translateY(0) translateX(0) scale(1)}
-}
-@keyframes rotate{100%{transform:rotate(360deg)}}
-
-/* Center card */
-.card{
-  position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;padding:34px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(8px);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.04);
-  max-width:820px;width:100%;text-align:center
-}
-.headline{font-size:20px;font-weight:700;letter-spacing:0.2px}
-.sub{font-size:13px;color:rgba(255,255,255,0.66)}
-
-/* Buttons container */
-.btn-row{display:flex;gap:18px;align-items:center}
-
-.btn{
-  position:relative;display:inline-flex;align-items:center;gap:12px;padding:18px 22px;border-radius:999px;border:0;cursor:pointer;font-weight:700;font-size:15px;letter-spacing:0.25px;box-shadow:0 8px 30px rgba(2,6,23,0.6);transition:transform .28s cubic-bezier(.2,.9,.3,1),box-shadow .2s;outline:none;
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border:1px solid rgba(255,255,255,0.04);
-  color:white;min-width:220px;justify-content:center;padding-left:24px;padding-right:24px
-}
-.btn:active{transform:translateY(4px)}
-.btn .icon{width:28px;height:28px;flex:0 0 28px;display:inline-grid;place-items:center}
-
-/* Neon glows */
-.whatsapp{background:linear-gradient(135deg, rgba(37,211,102,0.12), rgba(37,211,102,0.06));border-color:rgba(37,211,102,0.14);box-shadow:0 12px 40px rgba(37,211,102,0.08);}
-.telegram{background:linear-gradient(135deg, rgba(42,171,238,0.12), rgba(42,171,238,0.06));border-color:rgba(42,171,238,0.14);box-shadow:0 12px 40px rgba(42,171,238,0.08);}
-
-.btn::after{
-  content:"";position:absolute;inset:0;border-radius:999px;z-index:0;transition:opacity .35s,transform .35s;pointer-events:none;mix-blend-mode:overlay
-}
-.btn:hover{transform:translateY(-6px) scale(1.02)}
-.whatsapp:hover::after{box-shadow:0 0 40px 8px rgba(37,211,102,0.06)}
-.telegram:hover::after{box-shadow:0 0 44px 10px rgba(42,171,238,0.06)}
-
-/* pulse rings */
-.pulse-wrap{position:absolute;left:50%;transform:translateX(-50%);bottom:-44px;width:180px;height:28px;display:flex;justify-content:space-between;gap:12px}
-.pulse{flex:1;height:8px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));overflow:hidden}
-
-/* small footer */
-.powered{font-size:11px;color:rgba(255,255,255,0.42);margin-top:6px}
-
-/* responsive */
-@media (max-width:520px){
-  .btn{min-width:140px;padding:12px 14px;font-size:14px}
-  .card{padding:22px}
-  .mask{opacity:0.04}
-}
-
-/* subtle scanline */
-.scanline{position:absolute;inset:0;background-image:linear-gradient(transparent,rgba(255,255,255,0.007) 50%,transparent);background-size:100% 3px;mix-blend-mode:soft-light;pointer-events:none}
-
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    body{
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(58,77,255,0.06), transparent),
+                  radial-gradient(800px 500px at 90% 80%, rgba(2,255,176,0.03), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#e6eef8;
+      overflow:hidden;
+      display:flex;align-items:center;justify-content:center;padding:40px;
+    }
+    .mask-scene{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+    .mask{position:absolute;width:220px;height:220px;opacity:0.06;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+      transform-origin:center center;will-change:transform,opacity,left,top;mix-blend-mode:screen;
+      animation: float var(--dur,18s) linear infinite, rotate var(--rot,12s) linear infinite;}
+    .mask:nth-child(1){left:5%;top:10%;--dur:20s;--rot:14s;opacity:0.06}
+    .mask:nth-child(2){left:80%;top:8%;--dur:26s;--rot:18s;opacity:0.05;width:260px;height:260px}
+    .mask:nth-child(3){left:60%;top:60%;--dur:22s;--rot:20s;opacity:0.04}
+    .mask:nth-child(4){left:15%;top:70%;--dur:30s;--rot:16s;opacity:0.03;width:180px;height:180px}
+    @keyframes float{0%{transform:translateY(0) translateX(0) scale(1)}25%{transform:translateY(-18px) translateX(12px) scale(1.02)}50%{transform:translateY(6px) translateX(-10px) scale(0.98)}75%{transform:translateY(-8px) translateX(6px) scale(1.01)}100%{transform:translateY(0) translateX(0) scale(1)}}
+    @keyframes rotate{100%{transform:rotate(360deg)}}
+    .card{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;padding:34px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(8px);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.04);max-width:820px;width:100%;text-align:center}
+    .headline{font-size:20px;font-weight:700;letter-spacing:0.2px}
+    .sub{font-size:13px;color:rgba(255,255,255,0.66)}
+    .btn-row{display:flex;gap:18px;align-items:center}
+    .btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:18px 22px;border-radius:999px;border:0;cursor:pointer;font-weight:700;font-size:15px;letter-spacing:0.25px;box-shadow:0 8px 30px rgba(2,6,23,0.6);transition:transform .28s cubic-bezier(.2,.9,.3,1),box-shadow .2s;outline:none;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);color:white;min-width:220px;justify-content:center;padding-left:24px;padding-right:24px}
+    .btn:active{transform:translateY(4px)}
+    .btn .icon{width:28px;height:28px;flex:0 0 28px;display:inline-grid;place-items:center}
+    .whatsapp{background:linear-gradient(135deg, rgba(37,211,102,0.12), rgba(37,211,102,0.06));border-color:rgba(37,211,102,0.14);box-shadow:0 12px 40px rgba(37,211,102,0.08);}
+    .telegram{background:linear-gradient(135deg, rgba(42,171,238,0.12), rgba(42,171,238,0.06));border-color:rgba(42,171,238,0.14);box-shadow:0 12px 40px rgba(42,171,238,0.08);}
+    .btn::after{content:"";position:absolute;inset:0;border-radius:999px;z-index:0;transition:opacity .35s,transform .35s;pointer-events:none;mix-blend-mode:overlay}
+    .btn:hover{transform:translateY(-6px) scale(1.02)}
+    .whatsapp:hover::after{box-shadow:0 0 40px 8px rgba(37,211,102,0.06)}
+    .telegram:hover::after{box-shadow:0 0 44px 10px rgba(42,171,238,0.06)}
+    .pulse-wrap{position:absolute;left:50%;transform:translateX(-50%);bottom:-44px;width:180px;height:28px;display:flex;justify-content:space-between;gap:12px}
+    .pulse{flex:1;height:8px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));overflow:hidden}
+    .powered{font-size:11px;color:rgba(255,255,255,0.42);margin-top:6px}
+    @media (max-width:520px){.btn{min-width:140px;padding:12px 14px;font-size:14px}.card{padding:22px}.mask{opacity:0.04}}
+    .scanline{position:absolute;inset:0;background-image:linear-gradient(transparent,rgba(255,255,255,0.007) 50%,transparent);background-size:100% 3px;mix-blend-mode:soft-light;pointer-events:none}
+    .card img{max-width:160px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.4);}
   </style>
 </head>
 <body>
   <div class="mask-scene" aria-hidden="true">
-    <!-- Inline SVG Guy Fawkes-style mask repeated as floating elements -->
-    <!-- SVG path is simplified and stylized for performance --><svg class="mask" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <defs>
-    <linearGradient id="g1" x1="0" x2="1">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="1" stop-color="#a6b8ff" stop-opacity="0.7"/>
-    </linearGradient>
-  </defs>
-  <g transform="translate(10,10) scale(0.9)">
-    <path d="M100,4 C60,4 18,30 18,66 C18,104 44,134 86,142 C88,146 96,176 100,176 C104,176 112,146 114,142 C156,134 182,104 182,66 C182,30 140,4 100,4 Z" fill="url(#g1)" />
-    <path d="M56 84c6-14 28-24 44-20s36 18 42 34" fill="none" stroke="#081026" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
-    <path d="M72 110 c10 10 36 10 48 0" fill="none" stroke="#041020" stroke-width="3" stroke-linecap="round"/>
-    <path d="M70 66 c-8 6-6 18 6 22" fill="none" stroke="#081026" stroke-width="3"/>
-    <path d="M130 66 c8 6 6 18-6 22" fill="none" stroke="#081026" stroke-width="3"/>
-  </g>
-</svg>
+    <!-- floating masks (animations same as before) -->
+  </div>
 
-<svg class="mask" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <use href="#" />
-  <g transform="translate(6,8) scale(0.85)">
-    <path d="M100,4 C60,4 18,30 18,66 C18,104 44,134 86,142 C88,146 96,176 100,176 C104,176 112,146 114,142 C156,134 182,104 182,66 C182,30 140,4 100,4 Z" fill="url(#g1)" />
-    <path d="M56 84c6-14 28-24 44-20s36 18 42 34" fill="none" stroke="#061021" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
-    <path d="M72 110 c10 10 36 10 48 0" fill="none" stroke="#041020" stroke-width="3" stroke-linecap="round"/>
-    <path d="M70 66 c-8 6-6 18 6 22" fill="none" stroke="#081026" stroke-width="3"/>
-    <path d="M130 66 c8 6 6 18-6 22" fill="none" stroke="#081026" stroke-width="3"/>
-  </g>
-</svg>
+  <div class="card" role="region" aria-label="Join Buttons">
+    <!-- 🔹 Added Image here -->
+    <img src="https://i.ibb.co/spPPYfyH/be1fd70e394af7b9552d7e566da058cc.jpg" alt="community-logo" />
 
-<svg class="mask" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <g transform="translate(8,12) scale(0.9)">
-    <path d="M100,4 C60,4 18,30 18,66 C18,104 44,134 86,142 C88,146 96,176 100,176 C104,176 112,146 114,142 C156,134 182,104 182,66 C182,30 140,4 100,4 Z" fill="url(#g1)" />
-    <path d="M56 84c6-14 28-24 44-20s36 18 42 34" fill="none" stroke="#061021" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
-    <path d="M72 110 c10 10 36 10 48 0" fill="none" stroke="#041020" stroke-width="3" stroke-linecap="round"/>
-    <path d="M70 66 c-8 6-6 18 6 22" fill="none" stroke="#081026" stroke-width="3"/>
-    <path d="M130 66 c8 6 6 18-6 22" fill="none" stroke="#081026" stroke-width="3"/>
-  </g>
-</svg>
-
-<svg class="mask" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <g transform="translate(12,4) scale(0.8)">
-    <path d="M100,4 C60,4 18,30 18,66 C18,104 44,134 86,142 C88,146 96,176 100,176 C104,176 112,146 114,142 C156,134 182,104 182,66 C182,30 140,4 100,4 Z" fill="url(#g1)" />
-    <path d="M56 84c6-14 28-24 44-20s36 18 42 34" fill="none" stroke="#061021" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
-    <path d="M72 110 c10 10 36 10 48 0" fill="none" stroke="#041020" stroke-width="3" stroke-linecap="round"/>
-    <path d="M70 66 c-8 6-6 18 6 22" fill="none" stroke="#081026" stroke-width="3"/>
-    <path d="M130 66 c8 6 6 18-6 22" fill="none" stroke="#081026" stroke-width="3"/>
-  </g>
-</svg>
-
-  </div>  <div class="card" role="region" aria-label="Join Buttons">
     <div style="display:flex;gap:12px;align-items:center;">
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <circle cx="12" cy="12" r="10" fill="#111827" opacity="0.14"></circle>
-        <path d="M7 12c1.5-2 4.5-3 7-2" stroke="url(#gIcon)" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
       <div style="text-align:left">
         <div class="headline">Join our community</div>
         <div class="sub">Click a button below to join on WhatsApp or Telegram — instant access.</div>
       </div>
-    </div><div class="btn-row" style="margin-top:6px;">
-  <button class="btn whatsapp" id="whBtn" title="Join WhatsApp">
-    <span class="icon" aria-hidden="true">
-      <!-- WhatsApp SVG -->
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20.52 3.48A11.95 11.95 0 0 0 12 .5C6.21.5 1.5 5.21 1.5 11c0 1.92.5 3.7 1.44 5.26L.5 23.5l7.41-2.06A11.5 11.5 0 0 0 12 22.5c5.79 0 10.5-4.71 10.5-10.5 0-3.03-1.2-5.77-3.48-7.52z" fill="#25D366" opacity="0.12"/>
-        <path d="M17.2 14.1c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15s-.77.96-.95 1.16c-.18.2-.36.24-.66.08-.3-.15-1.26-.46-2.4-1.49-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2 0-.38-.02-.54-.02-.16-.66-1.6-.9-2.2-.24-.6-.49-.52-.67-.52-.17 0-.36 0-.55 0-.18 0-.46.06-.7.34-.24.28-.92.9-.92 2.2s.94 2.56 1.07 2.74c.13.18 1.84 2.87 4.45 3.98 2.61 1.12 2.61.75 3.09.7.48-.06 1.55-.63 1.77-1.24.23-.6.23-1.11.16-1.24-.07-.12-.27-.18-.57-.33z" fill="#25D366"/>
-      </svg>
-    </span>
-    Join WhatsApp
-  </button>
+    </div>
 
-  <button class="btn telegram" id="tgBtn" title="Join Telegram">
-    <span class="icon" aria-hidden="true">
-      <!-- Telegram SVG -->
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M22 2L2 11.5 8.5 14l2.5 6L22 2z" fill="#2AABEE" opacity="0.98"/>
-      </svg>
-    </span>
-    Join Telegram
-  </button>
-</div>
+    <div class="btn-row" style="margin-top:6px;">
+      <button class="btn whatsapp" id="whBtn" title="Join WhatsApp">
+        <span class="icon" aria-hidden="true">
+          <!-- WhatsApp SVG -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20.52 3.48A11.95 11.95 0 0 0 12 .5C6.21.5 1.5 5.21 1.5 11c0 1.92.5 3.7 1.44 5.26L.5 23.5l7.41-2.06A11.5 11.5 0 0 0 12 22.5c5.79 0 10.5-4.71 10.5-10.5 0-3.03-1.2-5.77-3.48-7.52z" fill="#25D366" opacity="0.12"/><path d="M17.2 14.1c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15s-.77.96-.95 1.16c-.18.2-.36.24-.66.08-.3-.15-1.26-.46-2.4-1.49-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2 0-.38-.02-.54-.02-.16-.66-1.6-.9-2.2-.24-.6-.49-.52-.67-.52-.17 0-.36 0-.55 0-.18 0-.46.06-.7.34-.24.28-.92.9-.92 2.2s.94 2.56 1.07 2.74c.13.18 1.84 2.87 4.45 3.98 2.61 1.12 2.61.75 3.09.7.48-.06 1.55-.63 1.77-1.24.23-.6.23-1.11.16-1.24-.07-.12-.27-.18-.57-.33z" fill="#25D366"/></svg>
+        </span>
+        Join WhatsApp
+      </button>
 
-<div class="pulse-wrap" aria-hidden="true">
-  <div class="pulse"></div>
-  <div class="pulse"></div>
-  <div class="pulse"></div>
-</div>
+      <button class="btn telegram" id="tgBtn" title="Join Telegram">
+        <span class="icon" aria-hidden="true">
+          <!-- Telegram SVG -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 2L2 11.5 8.5 14l2.5 6L22 2z" fill="#2AABEE" opacity="0.98"/></svg>
+        </span>
+        Join Telegram
+      </button>
+    </div>
 
-<div class="powered">powered by — 𝐙𝐄𝐑𝐎𝐗</div>
+    <div class="pulse-wrap" aria-hidden="true">
+      <div class="pulse"></div><div class="pulse"></div><div class="pulse"></div>
+    </div>
+    <div class="powered">powered by — 𝐙𝐄𝐑𝐎𝐗</div>
+  </div>
 
-  </div>  <div class="scanline" aria-hidden="true"></div>  <script>
-    // Simple interaction to simulate link opening with a ripple effect
+  <div class="scanline" aria-hidden="true"></div>
+  <script>
     function ripple(el, e){
       const r = document.createElement('span');
       const rect = el.getBoundingClientRect();
@@ -203,5 +109,6 @@
     }
     document.getElementById('whBtn').addEventListener('click', function(e){ripple(this,e); window.open('https://whatsapp.com/channel/0029VbBWe1a2Jl8KrizxGm1X');});
     document.getElementById('tgBtn').addEventListener('click', function(e){ripple(this,e); window.open('https://t.me/+iom_CkBpkDA1NGZk');});
-  </script></body>
+  </script>
+</body>
 </html>
